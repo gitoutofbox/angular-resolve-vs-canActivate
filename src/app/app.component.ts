@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SubjectService } from './services/subject.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'resolve-canactivate';
+  showLoader = false;
+  constructor(private subjectService: SubjectService) {
+    this.subjectService.getLoaderStatus$().subscribe(resp =>{
+      this.showLoader = resp['showLoader'];
+    })
+  }
 }
